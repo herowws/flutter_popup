@@ -1,15 +1,11 @@
 # flutter_popup
 
-A new Flutter project.
+A simple and elegant popup
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+<img width="435" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/0a755d5b-efb2-4007-b6de-a437fd28e066">
+<img width="455" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/7ed2ce74-3bb5-4d26-bd07-b8cd5950877e">
+<img width="447" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/5690d52e-6bdc-40a4-ad8d-b70863379f47">
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
