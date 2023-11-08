@@ -1,15 +1,41 @@
 # flutter_popup
 
-A new Flutter project.
+A simple and elegant popup
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+<img width="342" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/98c3d15e-323a-491e-a4e2-e7778c6330c7">
+<img width="342" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/c49daa76-de18-41df-806f-a734cd75b7a4">
+<img width="342" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/465dbd7c-7088-4b76-a2cc-83436c12dec6">
+<img width="342" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/c1ab417a-30b6-4f99-97c9-fbca4ccc697c">
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
+## How to use
+```
+dependencies:
+  flutter_popup: ^latest_version
+```
+
+```
+import 'package:flutter_popup/flutter_popup.dart';
+```
+```dart
+// easy to use
+CustomPopup(
+  content: Text('George says everything looks fine'),
+  child: Icon(Icons.help),
+),
+
+CustomPopup(
+  content: _Slider(),
+  child:Text('slider'),
+)
+
+CustomPopup(
+  content: Column(
+  mainAxisSize: MainAxisSize.min,
+    children: List.generate(5, (index) => Text('menu$index')),
+  ),
+  child: const Icon(Icons.add_circle_outline),
+)
+```
