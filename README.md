@@ -22,7 +22,20 @@ import 'package:flutter_popup/flutter_popup.dart';
 ```dart
 // easy to use
 CustomPopup(
-    content: Text('George says everything looks fine'),
-    child: Icon(Icons.help, color: Colors.grey),
+  content: Text('George says everything looks fine'),
+  child: Icon(Icons.help),
 ),
+
+CustomPopup(
+  content: _Slider(),
+  child:Text('slider'),
+)
+
+CustomPopup(
+  content: Column(
+  mainAxisSize: MainAxisSize.min,
+    children: List.generate(5, (index) => Text('menu$index')),
+  ),
+  child: const Icon(Icons.add_circle_outline),
+)
 ```
