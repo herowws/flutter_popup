@@ -91,28 +91,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-class _Slider extends StatefulWidget {
-  const _Slider();
-
-  @override
-  State<_Slider> createState() => __SliderState();
-}
-
-class __SliderState extends State<_Slider> {
-  double progress = 0.5;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 100,
-      child: Slider(
-        value: progress,
-        onChanged: (value) {
-          setState(() => progress = value);
-        },
-      ),
-    );
-  }
-}
