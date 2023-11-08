@@ -1,12 +1,11 @@
 name: flutter_popup
 description: beautiful popup for flutter
-version: 0.0.1
-homepage:
+version: 3.1.0
+homepage: https://github.com/herowws/flutter_popup
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
-  flutter: '>=3.3.0'
-
+  sdk: '>=2.17.0 <4.0.0'
+ 
 dependencies:
   flutter:
     sdk: flutter

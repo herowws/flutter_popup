@@ -4,8 +4,8 @@ enum _ArrowDirection { top, bottom }
 
 class CustomPopup extends StatelessWidget {
   final GlobalKey? anchorKey;
-  final Widget child;
   final Widget content;
+  final Widget child;
   final bool isLongPress;
   final Color? backgroundColor;
   final Color? arrowColor;
@@ -13,8 +13,8 @@ class CustomPopup extends StatelessWidget {
 
   const CustomPopup({
     super.key,
-    required this.child,
     required this.content,
+    required this.child,
     this.anchorKey,
     this.isLongPress = false,
     this.backgroundColor,
@@ -319,7 +319,11 @@ class _PopupRoute extends PopupRoute<void> {
               maxWidth: _viewportRect.width,
               maxHeight: _maxHeight,
             ),
-            child: child,
+            child: Material(
+              color: Colors.transparent,
+              type: MaterialType.transparency,
+              child: child,
+            ),
           ),
         ),
       ],

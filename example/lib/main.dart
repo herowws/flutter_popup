@@ -26,65 +26,92 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double progress = 0.5;
-  final GlobalKey _anchorKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('example'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 30),
-            child: CustomPopup(
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(5, (index) => Text('menu$index')),
-              ),
-              child: const Icon(Icons.add_circle_outline),
-            ),
-          ),
-        ],
-      ),
-      body: DefaultTextStyle(
-        style: const TextStyle(
-          decoration: TextDecoration.none,
-          fontSize: 16,
-          color: Colors.black,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const CustomPopup(
-              content: Text(
-                'George says everything looks fine',
-                style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontSize: 16,
-                  color: Colors.black,
+    return Material(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('example'),
+          actions: [
+            // example0 menu
+            Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: CustomPopup(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(5, (index) => Text('menu$index')),
                 ),
+                child: const Icon(Icons.add_circle_outline),
               ),
-              child: Icon(Icons.help, color: Colors.grey),
-            ),
-            CustomPopup(
-              anchorKey: _anchorKey,
-              content: SizedBox(
-                width: 100,
-                height: 100,
-                child: LayoutBuilder(
-                  builder: (c, v) => Slider(
-                    value: progress,
-                    onChanged: (value) {
-                      setState(() => progress = value);
-                    },
-                  ),
-                ),
-              ),
-              child: const Icon(Icons.help, color: Colors.grey),
             ),
           ],
         ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // example1  text
+            const CustomPopup(
+              content: Text('George says everything looks fine'),
+              child: Icon(Icons.help, color: Colors.grey),
+            ),
+            SizedBox(height: 20),
+
+            // example2  sliver
+            CustomPopup(
+              content: _Slider(),
+              child: UnconstrainedBox(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.primaries[10],
+                  child: Text('slider'),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // example3  sliver
+            CustomPopup(
+              content: CalendarDatePicker(
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now(),
+                onDateChanged: (v) {},
+              ),
+              child: UnconstrainedBox(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.primaries[10],
+                  child: Text('calendar'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Slider extends StatefulWidget {
+  const _Slider();
+
+  @override
+  State<_Slider> createState() => __SliderState();
+}
+
+class __SliderState extends State<_Slider> {
+  double progress = 0.5;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 300,
+      height: 100,
+      child: Slider(
+        value: progress,
+        onChanged: (value) {
+          setState(() => progress = value);
+        },
       ),
     );
   }
