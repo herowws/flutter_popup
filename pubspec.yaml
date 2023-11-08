@@ -1,0 +1,22 @@
+name: flutter_popup
+description: beautiful popup for flutter
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+ 
+dev_dependencies:
+  example:
+    path: example
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+ 
