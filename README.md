@@ -10,3 +10,12 @@ A simple and elegant popup
 <img width="342" alt="image" src="https://github.com/herowws/flutter_popup/assets/41428542/c1ab417a-30b6-4f99-97c9-fbca4ccc697c">
 
 
+## How to use
+```
+dependencies:
+  flutter_popup: ^latest_version
+```
+
+```
+import 'package:flutter_popup/flutter_popup.dart';
+```
