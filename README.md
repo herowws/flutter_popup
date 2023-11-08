@@ -19,7 +19,7 @@ dependencies:
 ```
 import 'package:flutter_popup/flutter_popup.dart';
 ```
-```
+```dart
 // easy to use
 CustomPopup(
     content: Text('George says everything looks fine'),
