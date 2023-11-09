@@ -50,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // example1  text
-            const CustomPopup(
+            CustomPopup(
+              barrierColor: Colors.green.withOpacity(0.1),
               content: Text('George says everything looks fine'),
               child: Icon(Icons.help, color: Colors.grey),
             ),
