@@ -1,6 +1,5 @@
 # flutter_popup
-
-The flutter_popup package allows you to easily show a simple, customizable popup on your wrapped widget. The highlight feature, which can be activated at will, helps draw the user's attention to the desired location.
+The flutter_popup package is a convenient tool that enables you to display a straightforward and customizable popup within your Flutter application. It offers a highlight feature that can be utilized to direct the user's attention to a specific area as needed.
 
 ## Getting Started
 
