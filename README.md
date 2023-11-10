@@ -12,7 +12,7 @@ The flutter_popup package is a convenient tool that enables you to display a str
 ## How to use
 ```
 dependencies:
-  flutter_popup: ^latest_version
+  flutter_popup: ^3.1.6
 ```
 
 ```
