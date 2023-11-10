@@ -10,6 +10,7 @@ class CustomPopup extends StatelessWidget {
   final Color? backgroundColor;
   final Color? arrowColor;
   final Color? barrierColor;
+  final bool showArrow;
 
   const CustomPopup({
     super.key,
@@ -19,6 +20,7 @@ class CustomPopup extends StatelessWidget {
     this.isLongPress = false,
     this.backgroundColor,
     this.arrowColor,
+    this.showArrow = true,
     this.barrierColor,
   });
 
@@ -31,6 +33,7 @@ class CustomPopup extends StatelessWidget {
       targetRect: offset & renderBox.paintBounds.size,
       backgroundColor: backgroundColor,
       arrowColor: arrowColor,
+      showArrow: showArrow,
       barriersColor: barrierColor,
       child: content,
     ));
@@ -55,6 +58,7 @@ class _PopupContent extends StatelessWidget {
   final double arrowHorizontal;
   final Color? backgroundColor;
   final Color? arrowColor;
+  final bool showArrow;
 
   const _PopupContent({
     Key? key,
@@ -62,6 +66,7 @@ class _PopupContent extends StatelessWidget {
     required this.childKey,
     required this.arrowKey,
     required this.arrowHorizontal,
+    required this.showArrow,
     this.arrowDirection = _ArrowDirection.top,
     this.backgroundColor,
     this.arrowColor,
@@ -80,7 +85,7 @@ class _PopupContent extends StatelessWidget {
           ),
           constraints: const BoxConstraints(minWidth: 50),
           decoration: BoxDecoration(
-            color: backgroundColor ?? Colors.white.withOpacity(0.8),
+            color: backgroundColor ?? Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
@@ -99,11 +104,8 @@ class _PopupContent extends StatelessWidget {
             key: arrowKey,
             quarterTurns: arrowDirection == _ArrowDirection.top ? 2 : 4,
             child: CustomPaint(
-              size: const Size(16, 8),
-              painter: _TrianglePainter(
-                //color: Theme.of(context).colorScheme.surface,
-                color: arrowColor ?? Colors.white.withOpacity(0.8),
-              ),
+              size: showArrow ? const Size(16, 8) : Size.zero,
+              painter: _TrianglePainter(color: arrowColor ?? Colors.white),
             ),
           ),
         ),
@@ -158,6 +160,7 @@ class _PopupRoute extends PopupRoute<void> {
   final GlobalKey _arrowKey = GlobalKey();
   final Color? backgroundColor;
   final Color? arrowColor;
+  final bool showArrow;
   final Color? barriersColor;
 
   double _maxHeight = _viewportRect.height;
@@ -178,6 +181,7 @@ class _PopupRoute extends PopupRoute<void> {
     required this.targetRect,
     this.backgroundColor,
     this.arrowColor,
+    required this.showArrow,
     this.barriersColor,
   }) : super(
           settings: settings,
@@ -295,6 +299,7 @@ class _PopupRoute extends PopupRoute<void> {
       arrowDirection: _arrowDirection,
       backgroundColor: backgroundColor,
       arrowColor: arrowColor,
+      showArrow: showArrow,
       child: child,
     );
     if (!animation.isCompleted) {

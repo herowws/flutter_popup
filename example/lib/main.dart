@@ -47,45 +47,48 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // example1  text
             CustomPopup(
               barrierColor: Colors.green.withOpacity(0.1),
+              backgroundColor: Colors.white,
               content: Text('George says everything looks fine'),
               child: Icon(Icons.help, color: Colors.grey),
             ),
             SizedBox(height: 20),
 
-            // example2  sliver
+            // example2  slider
             CustomPopup(
+              arrowColor: Colors.orange,
               content: _Slider(),
-              child: UnconstrainedBox(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  color: Colors.primaries[10],
-                  child: Text('slider'),
-                ),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: Colors.primaries[10],
+                child: Text('slider'),
               ),
             ),
             SizedBox(height: 20),
 
-            // example3  sliver
+            // example3  calendar
             CustomPopup(
+              showArrow: false,
               content: CalendarDatePicker(
                 initialDate: DateTime.now(),
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now(),
                 onDateChanged: (v) {},
               ),
-              child: UnconstrainedBox(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  color: Colors.primaries[10],
-                  child: Text('calendar'),
-                ),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: Colors.primaries[10],
+                child: Text('calendar'),
               ),
             ),
+
+            Text(
+              'data' * 100,
+              maxLines: 20,
+            )
           ],
         ),
       ),

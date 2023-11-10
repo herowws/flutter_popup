@@ -1,6 +1,6 @@
 # flutter_popup
 
-A simple and elegant popup
+The flutter_popup package allows you to easily show a simple, customizable popup on your wrapped widget. The highlight feature, which can be activated at will, helps draw the user's attention to the desired location.
 
 ## Getting Started
 
@@ -22,6 +22,14 @@ import 'package:flutter_popup/flutter_popup.dart';
 ```dart
 // easy to use
 CustomPopup(
+  content: Text('George says everything looks fine'),
+  child: Icon(Icons.help),
+),
+
+CustomPopup(
+  arrowColor: Colors.orange,
+  barrierColor: Colors.green.withOpacity(0.1),
+  backgroundColor: Colors.white,
   content: Text('George says everything looks fine'),
   child: Icon(Icons.help),
 ),
