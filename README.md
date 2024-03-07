@@ -46,38 +46,32 @@ CustomPopup(
   child: const Icon(Icons.add_circle_outline),
 )
 
-            Container(
-              decoration: BoxDecoration(color: Colors.white),
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CustomPopup(
-                    showArrow: false,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    barrierColor: Colors.transparent,
-                    contentDecoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    content: SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(
-                          4,
-                          (index) => Text('item$index'),
-                        ),
-                      ),
-                    ),
-                    child: Text('filter1'),
-                  ),
-                  Text('filter2'),
-                  Text('filter3'),
-                ],
-              ),
-            )
+Container(
+  decoration: BoxDecoration(color: Colors.white),
+  padding: EdgeInsets.symmetric(vertical: 10),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      CustomPopup(
+      showArrow: false,
+      contentPadding:EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      barrierColor: Colors.transparent,
+      contentDecoration: BoxDecoration(
+        color: Colors.white,
+       ),
+      content: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(4,(index) => Text('item$index'),),),),
+            child: Text('filter1'),
+          ),
+              Text('filter2'),
+              Text('filter3'),
+        ],
+  ),
+)
 ```
 
 
