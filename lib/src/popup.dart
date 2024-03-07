@@ -11,6 +11,9 @@ class CustomPopup extends StatelessWidget {
   final Color? arrowColor;
   final Color? barrierColor;
   final bool showArrow;
+  final EdgeInsets contentPadding;
+  final double? contentRadius;
+  final BoxDecoration? contentDecoration;
 
   const CustomPopup({
     super.key,
@@ -22,6 +25,9 @@ class CustomPopup extends StatelessWidget {
     this.arrowColor,
     this.showArrow = true,
     this.barrierColor,
+    this.contentPadding = const EdgeInsets.all(15),
+    this.contentRadius,
+    this.contentDecoration,
   });
 
   void _show(BuildContext context) {
@@ -35,6 +41,9 @@ class CustomPopup extends StatelessWidget {
       arrowColor: arrowColor,
       showArrow: showArrow,
       barriersColor: barrierColor,
+      contentPadding: contentPadding,
+      contentRadius: contentRadius,
+      contentDecoration: contentDecoration,
       child: content,
     ));
   }
@@ -59,6 +68,9 @@ class _PopupContent extends StatelessWidget {
   final Color? backgroundColor;
   final Color? arrowColor;
   final bool showArrow;
+  final EdgeInsets contentPadding;
+  final double? contentRadius;
+  final BoxDecoration? contentDecoration;
 
   const _PopupContent({
     Key? key,
@@ -70,6 +82,9 @@ class _PopupContent extends StatelessWidget {
     this.arrowDirection = _ArrowDirection.top,
     this.backgroundColor,
     this.arrowColor,
+    this.contentRadius,
+    required this.contentPadding,
+    this.contentDecoration,
   }) : super(key: key);
 
   @override
@@ -78,22 +93,23 @@ class _PopupContent extends StatelessWidget {
       children: [
         Container(
           key: childKey,
-          padding: const EdgeInsets.all(15),
+          padding: contentPadding,
           margin: const EdgeInsets.symmetric(vertical: 10).copyWith(
             top: arrowDirection == _ArrowDirection.bottom ? 0 : null,
             bottom: arrowDirection == _ArrowDirection.top ? 0 : null,
           ),
           constraints: const BoxConstraints(minWidth: 50),
-          decoration: BoxDecoration(
-            color: backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
+          decoration: contentDecoration ??
+              BoxDecoration(
+                color: backgroundColor ?? Colors.white,
+                borderRadius: BorderRadius.circular(contentRadius ?? 10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                  ),
+                ],
               ),
-            ],
-          ),
           child: child,
         ),
         Positioned(
@@ -162,6 +178,9 @@ class _PopupRoute extends PopupRoute<void> {
   final Color? arrowColor;
   final bool showArrow;
   final Color? barriersColor;
+  final EdgeInsets contentPadding;
+  final double? contentRadius;
+  final BoxDecoration? contentDecoration;
 
   double _maxHeight = _viewportRect.height;
   _ArrowDirection _arrowDirection = _ArrowDirection.top;
@@ -183,6 +202,9 @@ class _PopupRoute extends PopupRoute<void> {
     this.arrowColor,
     required this.showArrow,
     this.barriersColor,
+    required this.contentPadding,
+    this.contentRadius,
+    this.contentDecoration,
   }) : super(
           settings: settings,
           filter: filter,
@@ -300,6 +322,9 @@ class _PopupRoute extends PopupRoute<void> {
       backgroundColor: backgroundColor,
       arrowColor: arrowColor,
       showArrow: showArrow,
+      contentPadding: contentPadding,
+      contentRadius: contentRadius,
+      contentDecoration: contentDecoration,
       child: child,
     );
     if (!animation.isCompleted) {

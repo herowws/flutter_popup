@@ -5,18 +5,18 @@ abstract class Screen {
         PlatformDispatcher.instance.views.first,
       );
 
-  /// 获取屏幕宽度
+  /// screen width
   static double get width => mediaQuery.size.width;
 
-  /// 获取屏幕高度
+  // /screen height
   static double get height => mediaQuery.size.height;
 
-  /// 获取屏幕dp比例
+  /// dp
   static double get scale => mediaQuery.devicePixelRatio;
 
-  /// 获取顶部安全区域
+  /// top
   static double get statusBar => mediaQuery.padding.top;
 
-  /// 获取底部安全区域
+  /// bottom
   static double get bottomBar => mediaQuery.padding.bottom;
 }

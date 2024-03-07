@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
+        backgroundColor: Color(0xFFFAFAFA),
         appBar: AppBar(
           title: const Text('example'),
           actions: [
@@ -72,11 +73,14 @@ class _MyHomePageState extends State<MyHomePage> {
             // example3  calendar
             CustomPopup(
               showArrow: false,
-              content: CalendarDatePicker(
-                initialDate: DateTime.now(),
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now(),
-                onDateChanged: (v) {},
+              content: SizedBox(
+                width: 300,
+                child: CalendarDatePicker(
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now(),
+                  onDateChanged: (v) {},
+                ),
               ),
               child: Container(
                 padding: const EdgeInsets.all(10),
@@ -85,10 +89,43 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            Text(
-              'data' * 100,
-              maxLines: 20,
-            )
+            SizedBox(height: 20),
+
+            // example4  filter
+            Container(
+              decoration: BoxDecoration(color: Colors.white),
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomPopup(
+                    showArrow: false,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    barrierColor: Colors.transparent,
+                    contentDecoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    content: SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          4,
+                          (index) => Text('item$index'),
+                        ),
+                      ),
+                    ),
+                    child: Text('filter1'),
+                  ),
+                  Text('filter2'),
+                  Text('filter3'),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Text('data' * 100, maxLines: 20),
           ],
         ),
       ),

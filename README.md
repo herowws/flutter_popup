@@ -12,7 +12,7 @@ The flutter_popup package is a convenient tool that enables you to display a str
 ## How to use
 ```
 dependencies:
-  flutter_popup: ^3.1.8
+  flutter_popup: ^3.3.0
 ```
 
 ```
@@ -45,6 +45,39 @@ CustomPopup(
   ),
   child: const Icon(Icons.add_circle_outline),
 )
+
+            Container(
+              decoration: BoxDecoration(color: Colors.white),
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomPopup(
+                    showArrow: false,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    barrierColor: Colors.transparent,
+                    contentDecoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    content: SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          4,
+                          (index) => Text('item$index'),
+                        ),
+                      ),
+                    ),
+                    child: Text('filter1'),
+                  ),
+                  Text('filter2'),
+                  Text('filter3'),
+                ],
+              ),
+            )
 ```
 
 
