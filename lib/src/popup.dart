@@ -236,9 +236,15 @@ class _PopupRoute extends PopupRoute<void> {
   Rect? _getRect(GlobalKey key) {
     final currentContext = key.currentContext;
     final renderBox = currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) return null;
+    if (renderBox == null || currentContext == null) return null;
     final offset = renderBox.localToGlobal(renderBox.paintBounds.topLeft);
-    return offset & renderBox.paintBounds.size;
+    var rect = offset & renderBox.paintBounds.size;
+
+    if (Directionality.of(currentContext) == TextDirection.rtl) {
+      rect = Rect.fromLTRB(0, rect.top, rect.right - rect.left, rect.bottom);
+    }
+
+    return rect;
   }
 
   // Calculate the horizontal position of the arrow
