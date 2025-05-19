@@ -35,6 +35,7 @@ CustomPopup(
 
 CustomPopup(
   content: _Slider(),
+  position: PopupPosition.top,
   child:Text('slider'),
 )
 
