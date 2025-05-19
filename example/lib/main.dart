@@ -62,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             CustomPopup(
               arrowColor: Colors.orange,
               content: _Slider(),
+              position: PopupPosition.top,
               child: Container(
                 padding: const EdgeInsets.all(10),
                 color: Colors.primaries[10],
