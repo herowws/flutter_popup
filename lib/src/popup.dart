@@ -2,6 +2,8 @@ part of flutter_popup;
 
 enum _ArrowDirection { top, bottom }
 
+enum PopupPosition { auto, top, bottom }
+
 class CustomPopup extends StatelessWidget {
   final GlobalKey? anchorKey;
   final Widget content;
@@ -15,6 +17,8 @@ class CustomPopup extends StatelessWidget {
   final double? contentRadius;
   final BoxDecoration? contentDecoration;
   final VoidCallback? onBeforePopup;
+  final bool rootNavigator;
+  final PopupPosition position;
 
   const CustomPopup({
     super.key,
@@ -30,6 +34,8 @@ class CustomPopup extends StatelessWidget {
     this.contentRadius,
     this.contentDecoration,
     this.onBeforePopup,
+    this.rootNavigator = false,
+    this.position = PopupPosition.auto,
   });
 
   void _show(BuildContext context) {
@@ -40,7 +46,7 @@ class CustomPopup extends StatelessWidget {
 
     onBeforePopup?.call();
 
-    Navigator.of(context).push(
+    Navigator.of(context, rootNavigator: rootNavigator).push(
       _PopupRoute(
         targetRect: offset & renderBox.paintBounds.size,
         backgroundColor: backgroundColor,
@@ -50,6 +56,7 @@ class CustomPopup extends StatelessWidget {
         contentPadding: contentPadding,
         contentRadius: contentRadius,
         contentDecoration: contentDecoration,
+        position: position,
         child: content,
       ),
     );
@@ -169,6 +176,7 @@ class _TrianglePainter extends CustomPainter {
 
 class _PopupRoute extends PopupRoute<void> {
   final Rect targetRect;
+  final PopupPosition position;
   final Widget child;
 
   static const double _margin = 10;
@@ -212,6 +220,7 @@ class _PopupRoute extends PopupRoute<void> {
     required this.contentPadding,
     this.contentRadius,
     this.contentDecoration,
+    this.position = PopupPosition.auto,
   }) : super(
           settings: settings,
           filter: filter,
@@ -282,31 +291,27 @@ class _PopupRoute extends PopupRoute<void> {
   void _calculateChildOffset(Rect? childRect) {
     if (childRect == null) return;
 
-    // Calculate the vertical position of the popover
     final topHeight = targetRect.top - _viewportRect.top;
     final bottomHeight = _viewportRect.bottom - targetRect.bottom;
     final maximum = max(topHeight, bottomHeight);
     _maxHeight = childRect.height > maximum ? maximum : childRect.height;
-    if (_maxHeight > bottomHeight) {
-      // Above the target
+
+    if (position == PopupPosition.top ||
+        (position == PopupPosition.auto && _maxHeight > bottomHeight)) {
       _bottom = Screen.height - targetRect.top;
       _arrowDirection = _ArrowDirection.bottom;
       _scaleAlignDy = 1;
     } else {
-      // Below the target
       _top = targetRect.bottom;
       _arrowDirection = _ArrowDirection.top;
       _scaleAlignDy = 0;
     }
 
-    // Calculate the vertical position of the popover
     final left = targetRect.center.dx - childRect.center.dx;
     final right = left + childRect.width;
     if (right > _viewportRect.right) {
-      // at right
       _right = _margin;
     } else {
-      // at left
       _left = left < _margin ? _margin : left;
     }
   }

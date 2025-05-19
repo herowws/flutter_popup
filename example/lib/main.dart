@@ -73,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // example3  calendar
             CustomPopup(
               showArrow: false,
+              position: PopupPosition.top,
               content: SizedBox(
                 width: 300,
                 child: CalendarDatePicker(
@@ -126,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 20),
             Text('data' * 100, maxLines: 20),
+            TextField()
           ],
         ),
       ),
