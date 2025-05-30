@@ -17,6 +17,7 @@ class CustomPopup extends StatelessWidget {
   final double? contentRadius;
   final BoxDecoration? contentDecoration;
   final VoidCallback? onBeforePopup;
+  final VoidCallback? onAfterPopup;
   final bool rootNavigator;
   final PopupPosition position;
 
@@ -34,6 +35,7 @@ class CustomPopup extends StatelessWidget {
     this.contentRadius,
     this.contentDecoration,
     this.onBeforePopup,
+    this.onAfterPopup,
     this.rootNavigator = false,
     this.position = PopupPosition.auto,
   });
@@ -46,20 +48,22 @@ class CustomPopup extends StatelessWidget {
 
     onBeforePopup?.call();
 
-    Navigator.of(context, rootNavigator: rootNavigator).push(
-      _PopupRoute(
-        targetRect: offset & renderBox.paintBounds.size,
-        backgroundColor: backgroundColor,
-        arrowColor: arrowColor,
-        showArrow: showArrow,
-        barriersColor: barrierColor,
-        contentPadding: contentPadding,
-        contentRadius: contentRadius,
-        contentDecoration: contentDecoration,
-        position: position,
-        child: content,
-      ),
-    );
+    Navigator.of(context, rootNavigator: rootNavigator)
+        .push(
+          _PopupRoute(
+            targetRect: offset & renderBox.paintBounds.size,
+            backgroundColor: backgroundColor,
+            arrowColor: arrowColor,
+            showArrow: showArrow,
+            barriersColor: barrierColor,
+            contentPadding: contentPadding,
+            contentRadius: contentRadius,
+            contentDecoration: contentDecoration,
+            position: position,
+            child: content,
+          ),
+        )
+        .then((value) => onAfterPopup?.call());
   }
 
   @override
