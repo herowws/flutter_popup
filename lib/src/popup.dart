@@ -20,6 +20,8 @@ class CustomPopup extends StatelessWidget {
   final VoidCallback? onAfterPopup;
   final bool rootNavigator;
   final PopupPosition position;
+  final Duration animationDuration;
+  final Curve animationCurve;
 
   const CustomPopup({
     super.key,
@@ -38,6 +40,8 @@ class CustomPopup extends StatelessWidget {
     this.onAfterPopup,
     this.rootNavigator = false,
     this.position = PopupPosition.auto,
+    this.animationDuration = const Duration(milliseconds: 150),
+    this.animationCurve = Curves.easeInOut,
   });
 
   void _show(BuildContext context) {
@@ -60,6 +64,8 @@ class CustomPopup extends StatelessWidget {
             contentRadius: contentRadius,
             contentDecoration: contentDecoration,
             position: position,
+            animationDuration: animationDuration,
+            animationCurve: animationCurve,
             child: content,
           ),
         )
@@ -182,6 +188,8 @@ class _PopupRoute extends PopupRoute<void> {
   final Rect targetRect;
   final PopupPosition position;
   final Widget child;
+  final Duration animationDuration;
+  final Curve animationCurve;
 
   static const double _margin = 10;
   static final Rect _viewportRect = Rect.fromLTWH(
@@ -225,6 +233,8 @@ class _PopupRoute extends PopupRoute<void> {
     this.contentRadius,
     this.contentDecoration,
     this.position = PopupPosition.auto,
+    required this.animationDuration,
+    this.animationCurve = Curves.easeInOut,
   }) : super(
           settings: settings,
           filter: filter,
@@ -350,11 +360,15 @@ class _PopupRoute extends PopupRoute<void> {
       child: child,
     );
     if (!animation.isCompleted) {
+      final curvedAnimation = CurvedAnimation(
+        parent: animation,
+        curve: animationCurve,
+      );
       child = FadeTransition(
-        opacity: animation,
+        opacity: curvedAnimation,
         child: ScaleTransition(
           alignment: FractionalOffset(_scaleAlignDx, _scaleAlignDy),
-          scale: animation,
+          scale: curvedAnimation,
           child: child,
         ),
       );
@@ -383,5 +397,5 @@ class _PopupRoute extends PopupRoute<void> {
   }
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 150);
+  Duration get transitionDuration => animationDuration;
 }
