@@ -49,7 +49,7 @@ class CustomPopup extends StatefulWidget {
 }
 
 class CustomPopupState extends State<CustomPopup> {
-  void show(BuildContext context) {
+  void show() {
     final anchor = widget.anchorKey?.currentContext ?? context;
     final renderBox = anchor.findRenderObject() as RenderBox?;
     if (renderBox == null) return;
@@ -81,8 +81,8 @@ class CustomPopupState extends State<CustomPopup> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onLongPress: widget.isLongPress ? () => show(context) : null,
-      onTapUp: !widget.isLongPress ? (_) => show(context) : null,
+      onLongPress: widget.isLongPress ? () => show() : null,
+      onTapUp: !widget.isLongPress ? (_) => show() : null,
       child: widget.child,
     );
   }
