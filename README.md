@@ -73,6 +73,17 @@ Container(
         ],
   ),
 )
+
+// Show the popup programmatically
+final popupKey = GlobalKey<CustomPopupState>();
+// ...
+CustomPopup(
+  key: popupKey,
+  content: Text('George says everything looks fine'),
+  child: Icon(Icons.help),
+);
+// ...
+popupKey.currentState?.show();
 ```
 
 
