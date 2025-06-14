@@ -4,7 +4,7 @@ enum _ArrowDirection { top, bottom }
 
 enum PopupPosition { auto, top, bottom }
 
-class CustomPopup extends StatelessWidget {
+class CustomPopup extends StatefulWidget {
   final GlobalKey? anchorKey;
   final Widget content;
   final Widget child;
@@ -44,41 +44,46 @@ class CustomPopup extends StatelessWidget {
     this.animationCurve = Curves.easeInOut,
   });
 
-  void _show(BuildContext context) {
-    final anchor = anchorKey?.currentContext ?? context;
+  @override
+  State<CustomPopup> createState() => CustomPopupState();
+}
+
+class CustomPopupState extends State<CustomPopup> {
+  void show() {
+    final anchor = widget.anchorKey?.currentContext ?? context;
     final renderBox = anchor.findRenderObject() as RenderBox?;
     if (renderBox == null) return;
     final offset = renderBox.localToGlobal(renderBox.paintBounds.topLeft);
 
-    onBeforePopup?.call();
+    widget.onBeforePopup?.call();
 
-    Navigator.of(context, rootNavigator: rootNavigator)
+    Navigator.of(context, rootNavigator: widget.rootNavigator)
         .push(
           _PopupRoute(
             targetRect: offset & renderBox.paintBounds.size,
-            backgroundColor: backgroundColor,
-            arrowColor: arrowColor,
-            showArrow: showArrow,
-            barriersColor: barrierColor,
-            contentPadding: contentPadding,
-            contentRadius: contentRadius,
-            contentDecoration: contentDecoration,
-            position: position,
-            animationDuration: animationDuration,
-            animationCurve: animationCurve,
-            child: content,
+            backgroundColor: widget.backgroundColor,
+            arrowColor: widget.arrowColor,
+            showArrow: widget.showArrow,
+            barriersColor: widget.barrierColor,
+            contentPadding: widget.contentPadding,
+            contentRadius: widget.contentRadius,
+            contentDecoration: widget.contentDecoration,
+            position: widget.position,
+            animationDuration: widget.animationDuration,
+            animationCurve: widget.animationCurve,
+            child: widget.content,
           ),
         )
-        .then((value) => onAfterPopup?.call());
+        .then((value) => widget.onAfterPopup?.call());
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onLongPress: isLongPress ? () => _show(context) : null,
-      onTapUp: !isLongPress ? (_) => _show(context) : null,
-      child: child,
+      onLongPress: widget.isLongPress ? () => show() : null,
+      onTapUp: !widget.isLongPress ? (_) => show() : null,
+      child: widget.child,
     );
   }
 }
