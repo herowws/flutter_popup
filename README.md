@@ -57,9 +57,7 @@ Container(
       showArrow: false,
       contentPadding:EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       barrierColor: Colors.transparent,
-      contentDecoration: BoxDecoration(
-        color: Colors.white,
-       ),
+      contentDecoration: BoxDecoration(color: Colors.white),
       content: SizedBox(
         width: double.infinity,
         child: Column(
@@ -89,5 +87,6 @@ popupKey.currentState?.show();
 
 ## last
 <p>Our full-stack freelance team is opening to new projects</p>
-<p>If you are interested in purchasing demo projects or outsourcing projects, please contact me: QQ: 965471570, Gmail: herowws90@gmail.com.</p>
-<p>如果你想要购买演示项目,或者外包项目，请联系我: QQ:965471570  Gmail:herowws90@gmail.com</p>
+<p>If you have any questions about Flutter, or if you need me to customize a Flutter application for you, please feel free to contact me:
+QQ: 965471570 Gmail: herowws90@gmail.com</p>
+<p>如果您有任何关于Flutter的问题，或者需要我为您定制一个Flutter应用程序，请联系我: QQ:965471570  Gmail:herowws90@gmail.com</p>

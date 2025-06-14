@@ -26,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final popupKey = GlobalKey<CustomPopupState>();
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -130,6 +132,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 20),
             Text('data' * 100, maxLines: 20),
+
+            // Show the popup programmatically
+            CustomPopup(
+              key: popupKey,
+              content: Text('George says everything looks fine'),
+              child: Icon(Icons.help),
+            ),
           ],
         ),
       ),
