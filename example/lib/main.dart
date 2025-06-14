@@ -139,6 +139,12 @@ class _MyHomePageState extends State<MyHomePage> {
               content: Text('George says everything looks fine'),
               child: Icon(Icons.help),
             ),
+            ElevatedButton(
+              onPressed: () {
+                popupKey.currentState?.show();
+              },
+              child: Text('ShowPop'),
+            )
           ],
         ),
       ),
