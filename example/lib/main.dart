@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             // example1  text
             CustomPopup(
-              barrierColor: Colors.green.withOpacity(0.1),
+              barrierColor: Colors.green.withValues(alpha: 0.1),
               backgroundColor: Colors.white,
               content: Text('George says everything looks fine'),
               child: Icon(Icons.help, color: Colors.grey),
