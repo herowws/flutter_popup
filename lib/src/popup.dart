@@ -328,7 +328,7 @@ class _PopupRoute extends PopupRoute<void> {
 
     if (position == PopupPosition.top ||
         (position == PopupPosition.auto && _maxHeight! > bottomHeight)) {
-      _bottom = Screen.height - targetRect.top;
+      _bottom = _viewportRect!.bottom - targetRect.top + targetRect.height / 2;
       _arrowDirection = _ArrowDirection.bottom;
       _scaleAlignDy = 1;
     } else {
