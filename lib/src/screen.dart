@@ -1,4 +1,4 @@
-part of flutter_popup;
+part of '../flutter_popup.dart';
 
 abstract class Screen {
   static MediaQueryData get mediaQuery => MediaQueryData.fromView(

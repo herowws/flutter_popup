@@ -1,4 +1,4 @@
-part of flutter_popup;
+part of '../flutter_popup.dart';
 
 enum _ArrowDirection { top, bottom }
 
@@ -14,6 +14,7 @@ class CustomPopup extends StatefulWidget {
   final Color? barrierColor;
   final bool showArrow;
   final EdgeInsets contentPadding;
+  final EdgeInsets contentMargin;
   final double? contentRadius;
   final BoxDecoration? contentDecoration;
   final VoidCallback? onBeforePopup;
@@ -34,6 +35,7 @@ class CustomPopup extends StatefulWidget {
     this.showArrow = true,
     this.barrierColor,
     this.contentPadding = const EdgeInsets.all(8),
+    this.contentMargin = const EdgeInsets.symmetric(vertical: 10),
     this.contentRadius,
     this.contentDecoration,
     this.onBeforePopup,
@@ -69,6 +71,7 @@ class CustomPopupState extends State<CustomPopup> {
             showArrow: widget.showArrow,
             barriersColor: widget.barrierColor,
             contentPadding: widget.contentPadding,
+            contentMargin: widget.contentMargin,
             contentRadius: widget.contentRadius,
             contentDecoration: widget.contentDecoration,
             position: widget.position,
@@ -101,11 +104,11 @@ class _PopupContent extends StatelessWidget {
   final Color? arrowColor;
   final bool showArrow;
   final EdgeInsets contentPadding;
+  final EdgeInsets contentMargin;
   final double? contentRadius;
   final BoxDecoration? contentDecoration;
 
   const _PopupContent({
-    Key? key,
     required this.child,
     required this.childKey,
     required this.arrowKey,
@@ -116,8 +119,9 @@ class _PopupContent extends StatelessWidget {
     this.arrowColor,
     this.contentRadius,
     required this.contentPadding,
+    required this.contentMargin,
     this.contentDecoration,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +130,7 @@ class _PopupContent extends StatelessWidget {
         Container(
           key: childKey,
           padding: contentPadding,
-          margin: const EdgeInsets.symmetric(vertical: 10).copyWith(
+          margin: contentMargin.copyWith(
             top: arrowDirection == _ArrowDirection.bottom ? 0 : null,
             bottom: arrowDirection == _ArrowDirection.top ? 0 : null,
           ),
@@ -137,7 +141,7 @@ class _PopupContent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(contentRadius ?? 10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 10,
                   ),
                 ],
@@ -175,14 +179,32 @@ class _TrianglePainter extends CustomPainter {
     paint.color = color;
 
     path.lineTo(size.width * 0.66, size.height * 0.86);
-    path.cubicTo(size.width * 0.58, size.height * 1.05, size.width * 0.42,
-        size.height * 1.05, size.width * 0.34, size.height * 0.86);
+    path.cubicTo(
+      size.width * 0.58,
+      size.height * 1.05,
+      size.width * 0.42,
+      size.height * 1.05,
+      size.width * 0.34,
+      size.height * 0.86,
+    );
     path.cubicTo(size.width * 0.34, size.height * 0.86, 0, 0, 0, 0);
     path.cubicTo(0, 0, size.width, 0, size.width, 0);
-    path.cubicTo(size.width, 0, size.width * 0.66, size.height * 0.86,
-        size.width * 0.66, size.height * 0.86);
-    path.cubicTo(size.width * 0.66, size.height * 0.86, size.width * 0.66,
-        size.height * 0.86, size.width * 0.66, size.height * 0.86);
+    path.cubicTo(
+      size.width,
+      0,
+      size.width * 0.66,
+      size.height * 0.86,
+      size.width * 0.66,
+      size.height * 0.86,
+    );
+    path.cubicTo(
+      size.width * 0.66,
+      size.height * 0.86,
+      size.width * 0.66,
+      size.height * 0.86,
+      size.width * 0.66,
+      size.height * 0.86,
+    );
     canvas.drawPath(path, paint);
   }
 
@@ -219,6 +241,7 @@ class _PopupRoute extends PopupRoute<void> {
   final bool showArrow;
   final Color? barriersColor;
   final EdgeInsets contentPadding;
+  final EdgeInsets contentMargin;
   final double? contentRadius;
   final BoxDecoration? contentDecoration;
 
@@ -233,9 +256,6 @@ class _PopupRoute extends PopupRoute<void> {
   double? _right;
 
   _PopupRoute({
-    RouteSettings? settings,
-    ImageFilter? filter,
-    TraversalEdgeBehavior? traversalEdgeBehavior,
     required this.child,
     required this.targetRect,
     this.backgroundColor,
@@ -243,19 +263,17 @@ class _PopupRoute extends PopupRoute<void> {
     required this.showArrow,
     this.barriersColor,
     required this.contentPadding,
+    required this.contentMargin,
     this.contentRadius,
     this.contentDecoration,
     this.position = PopupPosition.auto,
     required this.animationDuration,
     this.animationCurve = Curves.easeInOut,
-  }) : super(
-          settings: settings,
-          filter: filter,
-          traversalEdgeBehavior: traversalEdgeBehavior,
-        );
+  });
 
   @override
-  Color? get barrierColor => barriersColor ?? Colors.black.withOpacity(0.1);
+  Color? get barrierColor =>
+      barriersColor ?? Colors.black.withValues(alpha: 0.1);
 
   @override
   bool get barrierDismissible => true;
@@ -373,6 +391,7 @@ class _PopupRoute extends PopupRoute<void> {
       arrowColor: arrowColor,
       showArrow: showArrow,
       contentPadding: contentPadding,
+      contentMargin: contentMargin,
       contentRadius: contentRadius,
       contentDecoration: contentDecoration,
       child: child,
